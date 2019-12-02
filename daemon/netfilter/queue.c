@@ -46,7 +46,8 @@ int Run(struct nfq_handle *h, int fd) {
 
     return errno;
 }
-
+#ifndef NFQA_CFG_F_UID_GID
 uint32_t nfq_get_uid(void *buffer, void *buffer2) {
     return 0;
 }
+#endif

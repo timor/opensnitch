@@ -5,13 +5,17 @@ install:
 	cd ui && make install && cd ..
 
 proto:
-	cd protocol && make
+	cd proto && make
 
 ui/resources_rc.py:
 	cd ui && make
 
-deps:
-	cd daemon && make deps
+daemon:
+	cd daemon && make
+
+deps: daemon ui
+
+ui:
 	cd ui && make deps
 
 clean:
