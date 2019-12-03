@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/conman"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/ui/protocol"
+	"github.com/Thermicorp/opensnitch/daemon/conman"
+	"github.com/Thermicorp/opensnitch/daemon/ui/protocol"
 )
 
 type Action string

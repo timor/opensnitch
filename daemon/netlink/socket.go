@@ -4,7 +4,7 @@ import (
     "syscall"
     "net"
 
-    "github.com/gustavo-iniguez-goya/opensnitch/daemon/log"
+    "github.com/Thermicorp/opensnitch/daemon/log"
 )
 
 func GetSocketInfo(proto string, srcIP net.IP, srcPort uint, dstIP net.IP, dstPort uint) (uid, inode int) {

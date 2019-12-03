@@ -9,11 +9,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/conman"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/log"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/rule"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/statistics"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/ui/protocol"
+	"github.com/Thermicorp/opensnitch/daemon/conman"
+	"github.com/Thermicorp/opensnitch/daemon/log"
+	"github.com/Thermicorp/opensnitch/daemon/rule"
+	"github.com/Thermicorp/opensnitch/daemon/statistics"
+	"github.com/Thermicorp/opensnitch/daemon/ui/protocol"
 
 	"golang.org/x/net/context"
 

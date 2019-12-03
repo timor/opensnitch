@@ -5,13 +5,13 @@ import (
 	"net"
 	"os"
 
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/dns"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/log"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/netfilter"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/netstat"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/procmon"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/ui/protocol"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/netlink"
+	"github.com/Thermicorp/opensnitch/daemon/dns"
+	"github.com/Thermicorp/opensnitch/daemon/log"
+	"github.com/Thermicorp/opensnitch/daemon/netfilter"
+	"github.com/Thermicorp/opensnitch/daemon/netstat"
+	"github.com/Thermicorp/opensnitch/daemon/procmon"
+	"github.com/Thermicorp/opensnitch/daemon/ui/protocol"
+	"github.com/Thermicorp/opensnitch/daemon/netlink"
 
 	"github.com/google/gopacket/layers"
 )

@@ -5,9 +5,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/conman"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/core"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/log"
+	"github.com/Thermicorp/opensnitch/daemon/conman"
+	"github.com/Thermicorp/opensnitch/daemon/core"
+	"github.com/Thermicorp/opensnitch/daemon/log"
 )
 
 type Type string

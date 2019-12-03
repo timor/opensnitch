@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/core"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/log"
+	"github.com/Thermicorp/opensnitch/daemon/core"
+	"github.com/Thermicorp/opensnitch/daemon/log"
 )
 
 type Inode struct {

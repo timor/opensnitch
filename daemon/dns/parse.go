@@ -1,7 +1,7 @@
 package dns
 
 import (
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/netfilter"
+	"github.com/Thermicorp/opensnitch/daemon/netfilter"
 	"github.com/google/gopacket/layers"
 )
 

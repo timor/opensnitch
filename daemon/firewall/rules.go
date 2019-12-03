@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/core"
+	"github.com/Thermicorp/opensnitch/daemon/core"
 )
 
 const DropMark = 0x18BA5

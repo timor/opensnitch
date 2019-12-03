@@ -11,16 +11,16 @@ import (
 	"runtime/pprof"
 	"syscall"
 
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/conman"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/core"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/dns"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/firewall"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/log"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/netfilter"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/procmon"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/rule"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/statistics"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/ui"
+	"github.com/Thermicorp/opensnitch/daemon/conman"
+	"github.com/Thermicorp/opensnitch/daemon/core"
+	"github.com/Thermicorp/opensnitch/daemon/dns"
+	"github.com/Thermicorp/opensnitch/daemon/firewall"
+	"github.com/Thermicorp/opensnitch/daemon/log"
+	"github.com/Thermicorp/opensnitch/daemon/netfilter"
+	"github.com/Thermicorp/opensnitch/daemon/procmon"
+	"github.com/Thermicorp/opensnitch/daemon/rule"
+	"github.com/Thermicorp/opensnitch/daemon/statistics"
+	"github.com/Thermicorp/opensnitch/daemon/ui"
 )
 
 var (

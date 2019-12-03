@@ -5,11 +5,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/conman"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/core"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/log"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/rule"
-	"github.com/gustavo-iniguez-goya/opensnitch/daemon/ui/protocol"
+	"github.com/Thermicorp/opensnitch/daemon/conman"
+	"github.com/Thermicorp/opensnitch/daemon/core"
+	"github.com/Thermicorp/opensnitch/daemon/log"
+	"github.com/Thermicorp/opensnitch/daemon/rule"
+	"github.com/Thermicorp/opensnitch/daemon/ui/protocol"
 )
 
 const (
