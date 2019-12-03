@@ -187,81 +187,50 @@ class UIService(ui_pb2_grpc.UIServicer, QtWidgets.QGraphicsObject):
         return False
 
     def _populate_stats(self, db, stats):
+
+        def count_hits(db, what_to_count: str, last_items):
+            fields = []
+            values = []
+            items = stats.by_host.items()
+
+            for _, event in enumerate(items):
+                if self.last_stats is not None and event in last_items:
+                    continue
+                what, hits = event
+                fields.append(what)
+                values.append(int(hits))
+            db.insert_batch(what_to_count, "(what, hits)", (1, 2), fields, values)
+
         fields = []
         values = []
 
-        for row, event in enumerate(stats.events):
-            if self.last_stats != None and event in self.last_stats.events:
+        for _, event in enumerate(stats.events):
+            if self.last_stats is not None and event in self.last_stats.events:
                 continue
             db.insert("connections",
-                    "(time, action, protocol, src_ip, src_port, dst_ip, dst_host, dst_port, uid, process, process_args, rule)",
-                    (event.time, event.rule.action, event.connection.protocol, event.connection.src_ip, str(event.connection.src_port),
-                        event.connection.dst_ip, event.connection.dst_host, str(event.connection.dst_port),
-                        str(event.connection.user_id), event.connection.process_path, " ".join(event.connection.process_args),
-                        event.rule.name),
-                    action_on_conflict="IGNORE"
-                    )
+                      "(time, action, protocol, src_ip, src_port, dst_ip, dst_host, dst_port, uid, process, process_args, rule)",
+                      (event.time, event.rule.action, event.connection.protocol, event.connection.src_ip, str(event.connection.src_port),
+                       event.connection.dst_ip, event.connection.dst_host, str(event.connection.dst_port),
+                       str(event.connection.user_id), event.connection.process_path, " ".join(event.connection.process_args),
+                       event.rule.name),
+                      action_on_conflict="IGNORE"
+                     )
             db.insert("rules",
-                    "(time, name, action, duration, operator)",
-                        (datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        event.rule.name, event.rule.action, event.rule.duration,
-                        event.rule.operator.operand + ": " + event.rule.operator.data),
-                    action_on_conflict="IGNORE")
+                      "(time, name, action, duration, operator)",
+                      (datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                       event.rule.name, event.rule.action, event.rule.duration,
+                       event.rule.operator.operand + ": " + event.rule.operator.data),
+                      action_on_conflict="IGNORE")
 
-        fields = []
-        values = []
-        items = stats.by_host.items()
-        last_items = self.last_stats.by_host.items() if self.last_stats != None else ''
-        for row, event in enumerate(items):
-            if self.last_stats != None and event in last_items:
-                continue
-            what, hits = event
-            fields.append(what)
-            values.append(int(hits))
-        db.insert_batch("hosts", "(what, hits)", (1,2), fields, values)
+        count_hits(db, "hosts", self.last_stats.by_host.items() if self.last_stats is not None else '')
+        count_hits(db, "procs", self.last_stats.by_executable.items() if self.last_stats is not None else '')
+        count_hits(db, "addrs", self.last_stats.by_address.items() if self.last_stats is not None else '')
+        count_hits(db, "ports", self.last_stats.by_port.items() if self.last_stats is not None else '')
 
-        fields = []
-        values = []
-        items = stats.by_executable.items()
-        last_items = self.last_stats.by_executable.items() if self.last_stats != None else ''
-        for row, event in enumerate(items):
-            if self.last_stats != None and event in last_items:
-                continue
-            what, hits = event
-            fields.append(what)
-            values.append(int(hits))
-        db.insert_batch("procs", "(what, hits)", (1,2), fields, values)
-
-        fields = []
-        values = []
-        items = stats.by_address.items()
-        last_items = self.last_stats.by_address.items() if self.last_stats != None else ''
-        for row, event in enumerate(items):
-            if self.last_stats != None and event in last_items:
-                continue
-            what, hits = event
-            fields.append(what)
-            values.append(int(hits))
-        db.insert_batch("addrs", "(what, hits)", (1,2), fields, values)
-
-        fields = []
-        values = []
-        items = stats.by_port.items()
-        last_items = self.last_stats.by_port.items() if self.last_stats != None else ''
-        for row, event in enumerate(items):
-            if self.last_stats != None and event in last_items:
-                continue
-            what, hits = event
-            fields.append(what)
-            values.append(int(hits))
-        db.insert_batch("ports", "(what, hits)", (1,2), fields, values)
-
-        fields = []
-        values = []
         items = stats.by_uid.items()
-        last_items = self.last_stats.by_uid.items() if self.last_stats != None else ''
+        last_items = self.last_stats.by_uid.items() if self.last_stats is not None else ''
         for row, event in enumerate(items):
-            if self.last_stats != None and event in last_items:
+            if self.last_stats is not None and event in last_items:
                 continue
             what, hits = event
             pw_name = what
@@ -271,7 +240,7 @@ class UIService(ui_pb2_grpc.UIServicer, QtWidgets.QGraphicsObject):
                 pw_name += " (error)"
             fields.append(pw_name)
             values.append(int(hits))
-        db.insert_batch("users", "(what, hits)", (1,2), fields, values)
+        db.insert_batch("users", "(what, hits)", (1, 2), fields, values)
 
         self.last_stats = stats
 
@@ -295,7 +264,10 @@ class UIService(ui_pb2_grpc.UIServicer, QtWidgets.QGraphicsObject):
 
     def AskRule(self, request, context):
         self._asking = True
-        rule = self._prompt_dialog.promptUser(request, self._is_local_request(context), context.peer())
+        rule = self._prompt_dialog.promptUser(
+            request,
+            self._is_local_request(context),
+            context.peer())
         self._last_ping = datetime.now()
         self._asking = False
         return rule
