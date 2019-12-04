@@ -17,10 +17,6 @@
 
 **THIS SOFTWARE IS WORK IN PROGRESS, DO NOT EXPECT IT TO BE BUG FREE AND DO NOT RELY ON IT FOR ANY TYPE OF SECURITY.**
 
-### THINGS NOT FILTERED
-* Anything over loopback
-* Anything multicast or broadcast
-
 ### TL;DR
 
 Make sure you have a correctly configured **Go >= 1.8** environment, that the `$GOPATH` environment variable is defined and then:
