@@ -42,7 +42,7 @@ adblocker:
 	clear
 	make 
 	clear
-	python make_ads_rules.py
+	./make_ads_rules.py
 	clear
 	cd ui && sudo pip3 install --user --upgrade . && cd ..
 	opensnitch-ui --socket unix:///tmp/osui.sock &

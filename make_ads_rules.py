@@ -1,3 +1,4 @@
+#! /bin/env python3
 """
 Script to make rules for blocking ads
 """
