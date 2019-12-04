@@ -1,4 +1,4 @@
-all: proto daemon ui/resources_rc.py
+all: proto daemon/opensnitchd ui
 
 install:
 	cd daemon && make install && cd ..
@@ -10,10 +10,10 @@ proto:
 ui/resources_rc.py:
 	cd ui && make
 
-daemon:
+daemon/opensnitchd:
 	cd daemon && make
 
-deps: daemon ui
+deps: daemon/opensnitchd ui/resources_rc.py
 
 ui:
 	cd ui && make deps
