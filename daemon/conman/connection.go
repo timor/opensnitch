@@ -49,25 +49,21 @@ func Parse(nfp netfilter.Packet, interceptUnknown bool) *Connection {
 		if err != nil {
 			log.Debug("%s", err)
 			return nil
-		} else if con == nil {
-			return nil
-		}
-		return con
-	} else {
-		ip, ok := ipLayer.(*layers.IPv4)
-		if ok == false || ip == nil {
-			return nil
-		}
-
-		con, err := NewConnection(&nfp, ip)
-		if err != nil {
-			log.Debug("%s", err)
-			return nil
-		} else if con == nil {
-			return nil
 		}
 		return con
 	}
+	ip, ok := ipLayer.(*layers.IPv4)
+	if ok == false || ip == nil {
+		return nil
+	}
+
+	con, err := NewConnection(&nfp, ip)
+	if err != nil {
+		log.Debug("%s", err)
+		return nil
+	}
+	return con
+
 }
 
 func newConnectionImpl(nfp *netfilter.Packet, c *Connection) (cr *Connection, err error) {
