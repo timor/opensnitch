@@ -126,7 +126,8 @@ func NewConnection6(nfp *netfilter.Packet, ip *layers.IPv6) (c *Connection, err 
 func (c *Connection) parseDirection() bool {
 	ret := false
 	for _, layer := range c.pkt.Packet.Layers() {
-		if layer.LayerType() == layers.LayerTypeTCP {
+		switch layer.LayerType() {
+		case layers.LayerTypeTCP:
 			if tcp, ok := layer.(*layers.TCP); ok == true && tcp != nil {
 				c.Protocol = "tcp"
 				c.DstPort = uint(tcp.DstPort)
@@ -137,7 +138,7 @@ func (c *Connection) parseDirection() bool {
 					c.getDomains(c.pkt, c)
 				}
 			}
-		} else if layer.LayerType() == layers.LayerTypeUDP {
+		case layers.LayerTypeUDP:
 			if udp, ok := layer.(*layers.UDP); ok == true && udp != nil {
 				c.Protocol = "udp"
 				c.DstPort = uint(udp.DstPort)
@@ -148,7 +149,7 @@ func (c *Connection) parseDirection() bool {
 					c.getDomains(c.pkt, c)
 				}
 			}
-		} else if layer.LayerType() == layers.LayerTypeUDPLite {
+		case layers.LayerTypeUDPLite:
 			if udplite, ok := layer.(*layers.UDPLite); ok == true && udplite != nil {
 				c.Protocol = "udplite"
 				c.DstPort = uint(udplite.DstPort)
