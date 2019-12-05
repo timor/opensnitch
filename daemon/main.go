@@ -213,11 +213,10 @@ func onPacket(packet netfilter.Packet) {
 			ruleName = log.Dim(r.Name)
 		}
 		log.Debug("%s %s -> %s:%d (%s)", log.Bold(log.Green("✔")), log.Bold(con.Process.Path), log.Bold(con.To()), con.DstPort, ruleName)
-	} else {
-		packet.SetVerdictAndMark(netfilter.NF_DROP, firewall.DropMark)
-
-		log.Warning("%s %s -> %s:%d (%s)", log.Bold(log.Red("✘")), log.Bold(con.Process.Path), log.Bold(con.To()), con.DstPort, log.Red(r.Name))
+		return
 	}
+	packet.SetVerdictAndMark(netfilter.NF_DROP, firewall.DropMark)
+	log.Warning("%s %s -> %s:%d (%s)", log.Bold(log.Red("✘")), log.Bold(con.Process.Path), log.Bold(con.To()), con.DstPort, log.Red(r.Name))
 }
 
 func main() {
