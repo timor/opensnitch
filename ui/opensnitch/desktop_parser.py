@@ -70,7 +70,7 @@ class LinuxDesktopParser(threading.Thread):
         Parse the desktop file at the given path and record it in self.apps
         """
         try:
-            file = open(desktop_path, "r", encoding="utf-8", errors=replace)
+            file = open(desktop_path, "r", encoding="utf-8", errors="replace")
             all_content = file.read()
             parser = configparser.ConfigParser(strict=False)  # Allow duplicate config entries
             parser.read_string(all_content)
