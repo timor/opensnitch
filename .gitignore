@@ -2,3 +2,17 @@
 *.pyc
 *.profile
 rules
+todo.yml
+bpf-test
+*.pyc
+*.h
+*.go
+*.c
+*.so
+*.o
+build
+dist
+*.egg-info
+.idea
+*.swp
+*.sw*
