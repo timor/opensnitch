@@ -30,11 +30,12 @@ class UIService(ui_pb2_grpc.UIServicer, QtWidgets.QGraphicsObject):
     _version_warning_trigger = QtCore.pyqtSignal(str, str)
     _status_change_trigger = QtCore.pyqtSignal()
 
-    def __init__(self, app, on_exit, config):
+    def __init__(self, app, on_exit, config, tray_only_arg):
         super(UIService, self).__init__()
         self._db = Database.instance()
 
         self._cfg = Config.init(config)
+        self._tray_only = tray_only_arg
         self._last_ping = None
         self._version_warning_shown = False
         self._asking = False
@@ -112,7 +113,8 @@ class UIService(ui_pb2_grpc.UIServicer, QtWidgets.QGraphicsObject):
         self._tray.setContextMenu(self._menu)
         self._tray.show()
         if not self._tray.isSystemTrayAvailable():
-            self._stats_dialog.show()
+           if not self._tray_only:
+               self._stats_dialog.show()
 
     @QtCore.pyqtSlot()
     def _on_status_change(self):
